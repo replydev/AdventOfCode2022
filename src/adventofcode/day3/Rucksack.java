@@ -9,11 +9,6 @@ public class Rucksack {
     private final Set<Character> firstCompartment;
     private final Set<Character> secondCompartment;
 
-    private static final List<Character> alphabet = List.of(
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
-    );
-
     public Rucksack(String line) {
         final int length = line.length();
         if (length % 2 != 0) {
@@ -37,11 +32,19 @@ public class Rucksack {
     public int calculate() {
         int tot = 0;
         for (Character c : firstCompartment) {
-            if (secondCompartment.contains(c)){
-                int indexOfCharacter = alphabet.indexOf(c) + 1;
+            if (secondCompartment.contains(c)) {
+                int indexOfCharacter = calculateIndex(c);
                 tot += indexOfCharacter;
             }
         }
         return tot;
+    }
+
+    private static int calculateIndex(char c) {
+        if (Character.isUpperCase(c)) {
+            return (int) c - 38;
+        } else {
+            return (int) c - 96;
+        }
     }
 }
