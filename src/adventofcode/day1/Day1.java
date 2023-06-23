@@ -9,26 +9,10 @@ import java.nio.file.Paths;
 public class Day1 {
     public static void main(String[] args) {
         Pair<Integer, Integer> result = readFromFile(Paths.get("resources/day1/elves_calories.txt"));
+        // Expected output should be 4th elves with 24000 calories
         System.out.printf("The most important elves is the %dth with %d calories", result.getKey(), result.getValue());
     }
 
-    /*
-        Five elves
-        1000
-        2000
-        3000
-
-        4000
-
-        5000
-        6000
-
-        7000
-        8000
-        9000
-
-        10000
-         */
     public static Pair<Integer, Integer> readFromFile(Path path) {
         try(BufferedReader bufferedReader = Files.newBufferedReader(path)) {
             String line;
