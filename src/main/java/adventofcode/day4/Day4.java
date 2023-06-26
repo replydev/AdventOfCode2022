@@ -6,8 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Day4 {
-    public static void main(String[] args) throws IOException {
-        try (BufferedReader bufferedReader = Files.newBufferedReader(Paths.get("resources/day4/clean_ranges.txt"))) {
+    public static int calculateContainedRanges() throws IOException {
+        try (BufferedReader bufferedReader = Files.newBufferedReader(Paths.get("src/test/resources/day4/clean_ranges.txt"))) {
             int count = 0;
             String line;
 
@@ -22,8 +22,7 @@ public class Day4 {
                     count++;
                 }
             }
-            // Expected output should be 2
-            System.out.printf("I found %d ranges", count);
+            return count;
         }
     }
 }
