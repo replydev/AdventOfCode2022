@@ -5,14 +5,6 @@ public class Range {
     private final int start;
     private final int stop;
 
-    public int getStart() {
-        return start;
-    }
-
-    public int getStop() {
-        return stop;
-    }
-
     public Range(String range) {
         if (range == null) {
             throw new IllegalArgumentException("Range should not be null");
