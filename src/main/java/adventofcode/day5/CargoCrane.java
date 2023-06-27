@@ -50,8 +50,19 @@ public class CargoCrane {
             throw new IllegalArgumentException("Invalid input file");
         }
 
-        Integer numberOfStacks = getNumberOfStacks(stackLines);
+        int numberOfStacks = getNumberOfStacks(stackLines);
+        final int maxLength = numberOfStacks * 3 + (numberOfStacks - 1);
         List<LinkedList<Character>> stacks = buildStackStructure(numberOfStacks);
+
+        stackLines = stackLines.stream()
+                .map(StringBuilder::new)
+                .peek(s -> {
+                    while (s.length() < maxLength) {
+                        s.append(' ');
+                    }
+                })
+                .map(StringBuilder::toString)
+                .toList();
 
         for (int i = stackLines.size() - 2; i >= 0; i--) {
             List<Optional<Character>> lineResult = parseLine(stackLines.get(i));
@@ -81,26 +92,13 @@ public class CargoCrane {
     }
 
     private static List<String> getStackLines(Path path) throws IOException {
-        List<String> list = Files.readAllLines(path)
+        return Files.readAllLines(path)
                 .stream()
                 .takeWhile(s -> !s.isBlank())
                 .toList();
-        final int maxLen = list.stream()
-                .map(String::length)
-                .max(Integer::compareTo)
-                .orElseThrow();
-
-        return list.stream().map(StringBuilder::new)
-                .peek(s -> {
-                    while (s.length() < maxLen) {
-                        s.append(' ');
-                    }
-                })
-                .map(StringBuilder::toString)
-                .toList();
     }
 
-    private static Integer getNumberOfStacks(List<String> stackLines) {
+    private static int getNumberOfStacks(List<String> stackLines) {
         return Arrays.stream(stackLines.get(stackLines.size() - 1).split(" "))
                 .filter(s -> !s.isBlank())
                 .map(String::trim)
