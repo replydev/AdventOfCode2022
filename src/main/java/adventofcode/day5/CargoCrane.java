@@ -54,15 +54,7 @@ public class CargoCrane {
         final int maxLength = numberOfStacks * 3 + (numberOfStacks - 1);
         List<LinkedList<Character>> stacks = buildStackStructure(numberOfStacks);
 
-        stackLines = stackLines.stream()
-                .map(StringBuilder::new)
-                .peek(s -> {
-                    while (s.length() < maxLength) {
-                        s.append(' ');
-                    }
-                })
-                .map(StringBuilder::toString)
-                .toList();
+        stackLines = addSpacesToLines(stackLines, maxLength);
 
         for (int i = stackLines.size() - 2; i >= 0; i--) {
             List<Optional<Character>> lineResult = parseLine(stackLines.get(i));
@@ -81,6 +73,18 @@ public class CargoCrane {
         }
 
         return new CargoCrane(stacks);
+    }
+
+    private static List<String> addSpacesToLines(List<String> stackLines, int length) {
+        return stackLines.stream()
+                .map(StringBuilder::new)
+                .peek(s -> {
+                    while (s.length() < length) {
+                        s.append(' ');
+                    }
+                })
+                .map(StringBuilder::toString)
+                .toList();
     }
 
     private static List<LinkedList<Character>> buildStackStructure(Integer numberOfStacks) {
