@@ -28,6 +28,9 @@ public class CargoCrane {
         LinkedList<Character> toLinked = stacks.get(instruction.to() - 1);
 
         for (int i = 0; i < instruction.elementsToMove(); i++) {
+            if (fromLinked.isEmpty()) {
+                throw new IllegalArgumentException(String.format("Cannot move %d to %d, no elements in stack", instruction.from(), instruction.to()));
+            }
             toLinked.addLast(fromLinked.removeLast());
         }
     }
