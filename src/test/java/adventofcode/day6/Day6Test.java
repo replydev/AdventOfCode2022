@@ -1,5 +1,6 @@
 package adventofcode.day6;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -22,7 +23,8 @@ class Day6Test {
 
     @ParameterizedTest
     @MethodSource("generateTestArguments")
-    void packet(String input, int expected) {
+    @DisplayName("Test Day6")
+    void testDay6(String input, int expected) {
         assertEquals(expected, Day6.packet(input));
     }
 }
