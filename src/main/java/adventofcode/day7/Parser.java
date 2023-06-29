@@ -48,9 +48,10 @@ public class Parser {
             throw new IllegalArgumentException("Invalid line");
         }
 
-        Directory currentDirectory = directoryMap.get(joinedCurrentDir());
+        String currentDirString = joinedCurrentDir();
+        Directory currentDirectory = directoryMap.get(currentDirString);
         if (currentDirectory == null) {
-            throw new IllegalStateException("Directory not found");
+            throw new IllegalStateException("Directory not found: " + currentDirString);
         }
 
         Sizeable sizeable;
@@ -106,6 +107,6 @@ public class Parser {
         if (inRoot()) {
             return DIRECTORY_DELIMITER;
         }
-        return String.join(DIRECTORY_DELIMITER, currentDir);
+        return String.join(DIRECTORY_DELIMITER, currentDir).substring(1);
     }
 }
