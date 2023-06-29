@@ -15,7 +15,7 @@ public class Parser {
 
     public Parser(Path path) throws IOException {
         directoryMap = new HashMap<>(Collections.singletonMap(DIRECTORY_DELIMITER, new Directory(DIRECTORY_DELIMITER)));
-        currentDir = new LinkedList<>(Collections.singletonList(DIRECTORY_DELIMITER));
+        currentDir = new LinkedList<>();
 
         List<String> lines = Files.readAllLines(path);
 
@@ -100,13 +100,13 @@ public class Parser {
     }
 
     private boolean inRoot() {
-        return currentDir.size() == 1;
+        return currentDir.size() == 0;
     }
 
     private String joinedCurrentDir() {
         if (inRoot()) {
             return DIRECTORY_DELIMITER;
         }
-        return String.join(DIRECTORY_DELIMITER, currentDir).substring(1);
+        return DIRECTORY_DELIMITER + String.join(DIRECTORY_DELIMITER, currentDir);
     }
 }
